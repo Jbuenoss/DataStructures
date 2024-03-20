@@ -73,9 +73,10 @@ double solution(string oper){
 
                 string sresp = to_string(resp); //still have calculation to do
 
-                while(sresp.back() == '0' || sresp.back() == '.'){ //erase the .000 of the double
+                while(sresp.back() == '0'){ //erase the .000 of the double
                     sresp.pop_back();
                 }
+                if(sresp.back() == '.')     sresp.pop_back();
 
                 for(int i = 0; i < (int)sresp.size(); i++){
                     sequence.push(sresp[i]);
@@ -121,6 +122,7 @@ int main(){
         solved resolvidos
         bug 1: pass int and not char
         bug 2: not erase .000 of the double
+        bug 3: erase '0' before the '.'
     */
 
     // char in = '0', fin = '9';    //verify the number represetations in char
