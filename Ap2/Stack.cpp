@@ -41,7 +41,6 @@ class Stack{
                 last = last->before;
                 delete aux;
             }
-            delete last;
         }
 };
 

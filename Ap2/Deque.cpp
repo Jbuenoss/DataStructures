@@ -91,8 +91,6 @@ class Deque{
             while(!isEmpty()){
                 popRight();
             }
-            delete first;
-            delete last;
         }
 };
 
