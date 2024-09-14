@@ -11,8 +11,8 @@ class Hash{
             Noh *next;
         };
         Noh sent;
-        int n; //quantidade de elementos
-        int m; //tamanho da tabela
+        int n; // number of elements
+        int m; // table size
         Noh **T;
 
         int hashFunction(int c){
@@ -50,6 +50,7 @@ class Hash{
             T[0] = &sent;
         }
 
+        // pre-condition: key was not already part of the hash table
         void Add(int key, double value){
             if(n == m)      resizeTable(2*m);
 
@@ -68,6 +69,31 @@ class Hash{
                 }
             }
         }
+
+        void getValue(int key){
+            int pos = hashFunction(key);
+            sent.key = key;
+            Noh* a = T[pos];
+            while(a->key != key){
+                a = a->next;
+            }
+            if(a == &sent)      cout << "The key " << key << " not belong to the list" << endl;
+            else                cout << "value: " << a->value << endl;
+        }
+
+        ~Hash(){
+            for(int i = 0; i < m; i++){
+                Noh* p = T[i];
+                while(p != &sent){
+                    Noh* next = p->next;
+                    delete p;
+                    p = next;
+                }
+                //T[i] is not an array, but a pointer to a linked list of nodes.
+                //delete[] T[i];
+            }
+            delete[] T;
+        }
 };
 
 int main(){
@@ -75,9 +101,14 @@ int main(){
 
     h.Add(2, 45.5);
     h.Add(45, 23.5);
-    h.Add(35, 2);
+    h.Add(35, 2.2323);
+    h.Add(3, 25.3);
+    h.Add(40, 42.34);
 
     h.PrintHash();
+    h.getValue(2);
+    h.getValue(3);
+    h.getValue(4);
 
     return 0;
 }
