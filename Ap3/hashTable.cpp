@@ -81,6 +81,25 @@ class Hash{
             else                cout << "value: " << a->value << endl;
         }
 
+        void removeValue(int key){
+            int pos = hashFunction(key);
+
+            Noh* *cima = &T[pos];
+            Noh* s = T[pos];
+
+            sent.key = key;
+            while(s->key != key){
+                cima = &s->next;
+                s = s->next;
+            }
+            if(s == &sent){
+                cout << "the key don't belong" << endl;
+                return;
+            }
+            *cima = s->next;
+            delete s;
+        }
+
         ~Hash(){
             for(int i = 0; i < m; i++){
                 Noh* p = T[i];
@@ -105,9 +124,13 @@ int main(){
     h.Add(3, 25.3);
     h.Add(40, 42.34);
 
+    h.removeValue(2);
+    h.removeValue(45);
+    h.removeValue(40);
+    h.removeValue(1);
+
     h.PrintHash();
     h.getValue(2);
-    h.getValue(3);
     h.getValue(4);
 
     return 0;
